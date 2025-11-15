@@ -24,8 +24,10 @@ OPENAI_BASE_URL = "https://api.openai.com/v1"
 MOCK_MODE = os.getenv("MOCK_MODE", "true").lower() == "true"
 
 # Redis connection
+redis_url = os.getenv("REDIS_URL", "redis://localhost:6379")
+
 try:
-    redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+    redis_client = redis.from_url(redis_url, decode_responses=True)
     redis_client.ping()
     CACHE_ENABLED = True
 except:
