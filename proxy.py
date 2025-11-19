@@ -84,6 +84,7 @@ def should_use_gpt35(messages, requested_model):
     return requested_model
 
 @app.post("/v1/chat/completions")
+@app.post("/chat/completions")  # Add fallback
 async def chat_completions(request: Request):
     """
     Proxy with caching + smart routing + cost tracking
